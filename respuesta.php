@@ -1,5 +1,5 @@
 <?php 
-include 'envia-contacto.php' ;
+include 'EmailService.php' ;
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +15,6 @@ include 'envia-contacto.php' ;
 
 </head>
 <body>
-
-
 
     <div class="container">
 	<br><br><br>	

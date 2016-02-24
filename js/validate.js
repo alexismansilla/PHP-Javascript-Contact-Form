@@ -1,20 +1,20 @@
 $(function(){
 
     $.fn.validate = function( options ) {
-
         // parametros       
         var id_msg_error = options.css.id_msg_error; 
         var class_error = options.css.class_error; 
         var msg_error = '';
-
+        
         // Defino el ID del formulario
         var frmId = "#"+$(this).attr("id");  
-
+        
         // Oculto el div de error        
         $(id_msg_error).css("display","none");
 
         // ejecuto las reglas
         $(frmId).submit(function(event){
+
             // Elimino las clases de error
             $(frmId+' *').removeClass(class_error);
 
@@ -24,9 +24,9 @@ $(function(){
             // Ejecuto las reglas
             for (var key in reglas) 
             {   
-                var arr = reglas[key];  // regla y parametros            
-                var regla = arr.split('|');   // Array de parametros
-                var obj = $("#"+key); // Campo actual
+                var arr = reglas[key];          // regla y parametros            
+                var regla = arr.split('|');     // Array de parametros
+                var obj = $("#"+key);           // Campo actual
 
                 // Campos de texto  
                 if (regla[0]=='text')
@@ -91,10 +91,5 @@ $(function(){
         return true;
 
         });
-
-       
-
     }
-
-
 })
