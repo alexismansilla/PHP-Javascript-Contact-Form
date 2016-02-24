@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Formulario de Contacto</title>	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-	<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
+# PHP-Javascript-Contact-Form
 
-    <div class="container">
+Creación de un formulario de contacto HTML, validaciones Jquery y Envío de correo mediante PHP
 
-	  <!-- Formulario debe tener un id que sera el que llama a la funcion -->
+> El contenido de este desarrollo esta adaptado para usos personales,
+> cualquier modificación es bienvenida.
+
+##### El desarrollo cuenta de los siguientes archivos :
+
+* EmailService.php - Clase para el envío de correos
+* contacto.php - Formulario de Contacto HTML
+* respuesta.php - Página de respuesta del formulario
+* js/validate.js - Funcion JS para validación de formularios
+
+### Configuracion EmailService.php
+```
+    public $mensaje_ok 			= 'Gracias por contactarnos';
+	public $mensaje_error 		= 'Lo Sentimos, Ocurrió un error al enviar su formulario';
+	public $mensaje_validacion 	= 'Debe Completar todos los Campos';
+	public $destino 			= 'gbarrerasaez.cl@gmail.com';
+	public $asunto  			= 'Contacto de Formulario de Sitio Web';	
+	//public $formato			= 'text/html' ;	 
+	public $formato				= 'text/plain' ;	 
+```
+
+### Formulario HTML
+```
+<!-- Formulario debe tener un id que sera el que llama a la funcion -->
       <form class="form-signin" id="form-contacto" method="POST"  action="respuesta.php">
-        <!-- Validacion para evitar ejecución directa -->
+       <!-- Validacion para evitar ejecución directa -->
         <input type="hidden" name="token" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>">
         <h2 class="form-signin-heading">Formulario de Contacto</h2>
         <br>
@@ -36,8 +49,11 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar!</button>
       </form>
     </div> 
+```
 
-    <script src="js/validate.js"></script>
+### Llamada JS
+```
+<script src="js/validate.js"></script>
     <script>
     $(function() 
 	{
@@ -57,13 +73,14 @@
         }); 
 	});
     </script>
+```
 
-<style>
-	.error
-	{
-		background-color: #cc6600;
-	}	
-</style>
-	
-</body>
-</html>
+### Página de Respuesta
+```
+<?php 
+include 'EmailService.php' ;
+...
+	  <div class="well well-sm"><?php echo $respuesta; ?></div>
+...
+?>
+```
